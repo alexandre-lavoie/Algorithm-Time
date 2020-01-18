@@ -4,7 +4,7 @@ module.exports = function(models){
 	var viewUtils = require(__base + '/libs/viewUtils');
 	var router = express.Router();
 
-	router.get('/', function(req, res, next) {
+	router.get('/500.shtml', function(req, res, next) {
 		data = {};
 		viewUtils.initializeSession(req, data, models, function(data){
 			models.user_model.count({}, function(err, usercount){

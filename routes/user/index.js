@@ -309,8 +309,12 @@ module.exports = function(models) {
 				res.redirect('profile');
 			} else {
 				models.user_model.find({nickname: req.body.nickname.toLowerCase(), password: sha256(req.body.password)}, function(err, users){
+					if(err) {
+						console.log(err);
+						res.redirect("/error");
+					}
 					// not valid credentials
-					if(users.length < 1 || users.length > 1){
+					else if(users.length < 1 || users.length > 1){
 						viewUtils.load(res, 'user/login', {error_msg: "Invalid Login"});
 					}else{
 						var user = users[0];
